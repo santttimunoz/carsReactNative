@@ -14,6 +14,7 @@ export default function LogIn(){
     const {users, setUsers} = useAppContext()
     const[modalVisible, setModalVisible] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [showPass, setShowPass] = useState(false)
     const navigation = useNavigation() 
 
     const closeModal = () =>{
@@ -30,6 +31,8 @@ export default function LogIn(){
                 setModalVisible(true) 
             }else if(user && pass){
                 navigation.navigate('Cars')
+                setUserName('')
+                setPassword('')
             }else if(user && !pass){
                 setErrorMessage("contraseña incorrecta")
                 setModalVisible(true)
@@ -55,7 +58,9 @@ export default function LogIn(){
                  label="Password"
                  left={<TextInput.Icon icon="lock" />}
                  onChangeText={(password) => setPassword(password)}
-                 value={password}/> 
+                 secureTextEntry={!showPass}
+                 value={password}
+                 right={<TextInput.Icon icon={showPass ? "eye" : "eye-off"} onPress={()=>setShowPass(!showPass)} />}/> 
                  <Button
                     style={{ marginTop: 20, backgroundColor: 'blue' }}                   
                     labelStyle={{color:'white'}}

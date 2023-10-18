@@ -6,7 +6,7 @@ const ListCars = () => {
 
     const renderItem = ({ item }) => (
       <View style={{borderRadius:25, backgroundColor:"rgba(0, 0, 0, 0.2)", padding:10, marginTop:10}}>
-        <Text style={{fontSize:20, fontWeight:"bold", marginTop:10, textAlign:"center"}}>Lista de vehiculos</Text>
+        <Text style={{fontSize:20, fontWeight:"bold", marginTop:10, textAlign:"center"}}>vehiculo</Text>
         <Text style={{marginTop:10}}>PlateNumber: {item.plateNumber}</Text>
         <Text>Brand: {item.brand}</Text>
         <Text>state: {item.state}</Text>

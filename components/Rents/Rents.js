@@ -4,6 +4,7 @@ import { TextInput, Button } from "react-native-paper";
 import { styles } from "../../assets/styles/styles";
 import { useNavigation } from "@react-navigation/native";
 import { useAppContext } from "../appProvider/AppProvider";
+import { Ventana } from "../Ventana/Ventana";
 
 export default function Rents(){
 
@@ -14,7 +15,13 @@ export default function Rents(){
     const {users, setUser} = useAppContext() 
     const {cars, setCars} = useAppContext()
     const {rents, setRents} = useAppContext()
+    const [errorMessage, setErrorMessage] = useState("");
+    const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation() 
+
+    const closeModal = () => {
+        setModalVisible(false);
+      }
 
     function guardar(){
         const rent = {
@@ -33,9 +40,21 @@ export default function Rents(){
         }else if(rentExist){
             setErrorMessage("renta existente")
             setModalVisible(true)
+        }else if(!userExists){
+            setErrorMessage("usuario no existe")
+            setModalVisible(true)
+        }else if(!carExist){
+            setErrorMessage("vehiculo no existe")
+            setModalVisible(true)
         }else if(!rentExist && carExist && userExists){
             setErrorMessage("renta guardada")
+            setModalVisible(true)            
             setCars([...rents, rent])
+            console.log(rents)
+            setRentNumber('')
+            setUserName('')
+            setPlateNumber('')
+            setRentDate('')
         }
     }
 
@@ -80,6 +99,13 @@ export default function Rents(){
                 >
                     Resgistrar
                 </Button> 
+                {modalVisible && (
+          <Ventana
+            modalVisible={modalVisible}
+            closeModal={closeModal}
+            message={errorMessage}
+          />
+        )}
                 <Text style={{ marginTop: 10}}>Quieres ver los vehiculos?{' '}
                 <Text style={{color:'blue', fontWeight:"bold"}} onPress={()=> navigation.navigate('Cars')}>
                      Ir a los vehiculos
