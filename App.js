@@ -1,20 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { styles } from "./assets/styles/styles.jsx"
+import { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LogIn from "./components/LogIn/LogIn.js"
+import Cars from './components/Cars/Cars.js'
+import Rents from './components/Rents/Rents.js';
+import SignUp from './components/SignUp/SignUp.js';
+import { AppProvider } from './components/appProvider/AppProvider.js';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+  const Stack = createNativeStackNavigator()
+  const [users, setUsers] = useState([])
+  const [rents, setRents] = useState([])
+  const [cars, setCars] = useState([])
+
+  return (   
+    <AppProvider>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName='App'
+      >
+        <Stack.Screen name="LogIn" component={SignUp}
+         options={{
+          gestureEnabled: false, // Deshabilitar el deslizamiento horizontal en esta pantalla          
+        }}/>          
+        <Stack.Screen name="Cars" component={Cars}/>
+        <Stack.Screen name="SignUp" component={SignUp}/>
+        <Stack.Screen name="Rents" component={Rents}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+      </AppProvider>      
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
