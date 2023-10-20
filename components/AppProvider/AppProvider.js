@@ -9,7 +9,7 @@ export const useAppContext = () => {
 export const AppProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [rents, setRents] = useState([]);
-  const [cars, setCars] = useState([]);  
+  const [cars, setCars] = useState([]);    
 
   return (
     <AppContext.Provider value={{ users, setUsers, rents, setRents, cars, setCars }}>

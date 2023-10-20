@@ -10,10 +10,7 @@ import { AppProvider } from './components/appProvider/AppProvider.js';
 
 export default function App() {
 
-  const Stack = createNativeStackNavigator()
-  const [users, setUsers] = useState([])
-  const [rents, setRents] = useState([])
-  const [cars, setCars] = useState([])
+  const Stack = createNativeStackNavigator()  
 
   return (   
     <AppProvider>

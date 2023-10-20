@@ -10,8 +10,8 @@ import { Ventana } from "../Ventana/Ventana";
 export default function Cars() {
   const [plateNumber, setPlateNumber] = useState("");
   const [brand, setBrand] = useState("");
-  const [state, setState] = useState("");
-  const { cars, setCars } = useAppContext();
+  const [state, setState] = useState('able')
+  const {cars, setCars } = useAppContext();
   const { users, setUsers } = useAppContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -72,14 +72,29 @@ export default function Cars() {
           onChangeText={(brand) => setBrand(brand)}
           value={brand}
         />               
-              <TextInput
+              {/* <TextInput
           style={{ marginTop: 10 }}
           autoFocus
           label="state"
           left={<TextInput.Icon icon="account" />}
           onChangeText={(state) => setState(state)}
           value={state}
-        />   
+        />    */}
+        <View style={{flexDirection:'row'}}>        
+          <RadioButton          
+          status={state === 'able' ? 'checked' : 'unchecked'}
+          value='able'
+          onPress={()=> setState('able')}
+          />
+          <Text style={{marginTop:10}}>Able</Text>          
+        </View>
+        <View style={{flexDirection:'row'}}>          
+          <RadioButton
+          status={state === 'disable' ? 'checked' : 'unchecked'}
+          value='disable'
+          onPress={()=> setState('disable')}/>
+          <Text style={{marginTop:10}}>Disable</Text>
+        </View>
         <Button
           style={{ marginTop: 20, backgroundColor: "blue" }}
           labelStyle={{ color: "white" }}

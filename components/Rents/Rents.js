@@ -14,7 +14,7 @@ export default function Rents(){
     const [rentDate, setRentDate] = useState('')    
     const {users, setUser} = useAppContext() 
     const {cars, setCars} = useAppContext()
-    const {rents, setRents} = useAppContext()
+    const {rents, setRents} = useAppContext()    
     const [errorMessage, setErrorMessage] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation() 
@@ -31,13 +31,13 @@ export default function Rents(){
             rentDate: rentDate
         }
         let rentExist = rents.some(rentExist => rentExist.rentNumber === rent.rentNumber)
-        let carExist = cars.some(carExist => carExist.plateNumber === rent.plateNumber)
+        let carExist = cars.some(carExist => carExist.plateNumber === rent.plateNumber)              
         const userExists = users.some(existingUser => existingUser.username === rent.userName);
 
         if(plateNumber == "" || userName == "" || rentNumber == "" || rentDate == ""){
             setErrorMessage("llenar los campos")
             setModalVisible(true)
-        }else if(rentExist){
+        }else if(rentExist && carExist){
             setErrorMessage("renta existente")
             setModalVisible(true)
         }else if(!userExists){
@@ -46,15 +46,15 @@ export default function Rents(){
         }else if(!carExist){
             setErrorMessage("vehiculo no existe")
             setModalVisible(true)
-        }else if(!rentExist && carExist && userExists){
+        }else if(!rentExist && carExist && userExists){                               
             setErrorMessage("renta guardada")
-            setModalVisible(true)            
-            setCars([...rents, rent])
-            console.log(rents)
+            setModalVisible(true)                                             
+            setRents([...rents, rent])
+            console.log(rents)            
             setRentNumber('')
             setUserName('')
             setPlateNumber('')
-            setRentDate('')
+            setRentDate('')                                      
         }
     }
 
